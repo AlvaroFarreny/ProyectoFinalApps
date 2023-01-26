@@ -448,6 +448,10 @@ public class MainActivity extends AppCompatActivity {
                     lockActionsMenu();
                     launchSearchActivity();
                     break;
+                case CAMBIAR_PICTO:
+                    lockActionsMenu();
+                    launchSeleccionarPictos();
+                    break;
             }
         });
 
@@ -540,6 +544,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void launchSearchActivity() {
         Intent intent = new Intent(this, PictoSearchActivity.class);
+        startActivity(intent);
+    }
+
+    private void launchSeleccionarPictos() {
+        Intent intent = new Intent(this, PictoAddCategory.class);
         startActivity(intent);
     }
 
