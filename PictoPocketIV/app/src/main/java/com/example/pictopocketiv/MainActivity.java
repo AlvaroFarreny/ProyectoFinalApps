@@ -448,7 +448,7 @@ public class MainActivity extends AppCompatActivity {
                     lockActionsMenu();
                     launchSearchActivity();
                     break;
-                case CAMBIAR_PICTO:
+                case SELECCIONAR_PICTOS:
                     lockActionsMenu();
                     launchSeleccionarPictos();
                     break;
@@ -548,7 +548,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void launchSeleccionarPictos() {
-        Intent intent = new Intent(this, PictoAddCategory.class);
+        Intent intent = new Intent(this, PictoAddCategoryActivity.class);
         startActivity(intent);
     }
 

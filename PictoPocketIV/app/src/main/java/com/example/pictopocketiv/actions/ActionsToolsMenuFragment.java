@@ -120,7 +120,7 @@ public class ActionsToolsMenuFragment extends Fragment {
             mActionsMenuMV.setAction(ActionsMV.ActionMVType.BLOCK_TOOLS);
         });
         mAddSetPictos.setOnClickListener(view ->{
-            mActionsMenuMV.setAction(ActionsMV.ActionMVType.CAMBIAR_PICTO);
+            mActionsMenuMV.setAction(ActionsMV.ActionMVType.SELECCIONAR_PICTOS);
         });
     }
 

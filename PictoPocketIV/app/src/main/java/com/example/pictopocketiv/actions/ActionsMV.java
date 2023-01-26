@@ -9,7 +9,7 @@ public class ActionsMV extends ViewModel  {
     public enum ActionMVType {
         SEARCH, ADD_FROM_CAMERA, ADD_FROM_GALLERY,
         DENY,REMOVE,EDIT,
-        BLOCK_TOOLS, UNBLOCK_TOOLS, CAMBIAR_PICTO
+        BLOCK_TOOLS, UNBLOCK_TOOLS, SELECCIONAR_PICTOS
     }
 
     private MutableLiveData<ActionMVType> mAction = new MutableLiveData<>();

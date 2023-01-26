@@ -31,10 +31,12 @@ import java.util.concurrent.ExecutionException;
  */
 public class PictoAddCategroyFragment extends Fragment {
 
+    private static enum ButtonActions{
+        TIEMPO, TRANSPORTE, DEPORTE
+    }
+
     private static final String TAG = PictoAddCategroyFragment.class.getSimpleName();
-    private final LinkedList<ArasaacModel.Pictogram> mResults = new LinkedList<>();
-    private PictoSearchResultAdapter mAdapter;
-    private AppCompatActivity mActivity;
+
     private Button mTiempobtn;
     private Button mTransportebtn;
     private Button mDeportesbtn;
@@ -48,7 +50,6 @@ public class PictoAddCategroyFragment extends Fragment {
      */
     public static PictoAddCategroyFragment newInstance(AppCompatActivity activity) {
         PictoAddCategroyFragment fragment = new PictoAddCategroyFragment();
-        fragment.mActivity = activity;
         Bundle args = new Bundle();
         //args.putString(ARG_ACTIVITY, param2);
         fragment.setArguments(args);
@@ -67,7 +68,7 @@ public class PictoAddCategroyFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_picto_search, container, false);
+        return inflater.inflate(R.layout.fragment_picto_addcategory, container, false);
     }
 
 
@@ -85,62 +86,55 @@ public class PictoAddCategroyFragment extends Fragment {
     }
 
     private void setWidgetsUI(@NonNull View view) {
-        RecyclerView mResultsRecView = view.findViewById(R.id.result_list_recv);
-        // TODO: Get all locale & res from properties file
-        mAdapter = new PictoSearchResultAdapter(mResults, mActivity,
-                getLayoutInflater(), "es", 500);
-        mResultsRecView.setAdapter(mAdapter);
-        mResultsRecView.setLayoutManager(new GridLayoutManager(
-                this.getContext(), 1,
-                RecyclerView.VERTICAL, false));
-        // btn
+        // btn HACER UN ENUM PARA GESTIONAR ESTOS BOTONES!!!
         mTiempobtn = view.findViewById(R.id.buttontiempo);
         mDeportesbtn = view.findViewById(R.id.buttondeportes);
         mTransportebtn = view.findViewById(R.id.buttontransporte);
     }
 
     private void setListenersUI() {
-    }
-
-    private void hideKeyboardUI() {
-        InputMethodManager inputMethodManager = (InputMethodManager)
-                getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-        View view = getView();
-        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
-    }
-
-
-    /** Actions **/
-    private void onCancelActivity() {
-        hideKeyboardUI();
-        getActivity().finish(); // finish the activity
-    }
-
-
-    /** Data **/
-    private void setData(String term) {
-
-        // ==== Searching pictograms by term
-        // Task declaration
-        ArasaacService.GetPictogramsBySearchTerm getPictogramsBySearchTerm =
-                new ArasaacService.GetPictogramsBySearchTerm("es");
-
-        try {
-
-            // Task execution (async)
-            List<ArasaacModel.Pictogram> pictograms = getPictogramsBySearchTerm.execute(term).get();
-            mResults.clear();   // clear old results
-
-            // dump results
-            for (ArasaacModel.Pictogram pictogram : pictograms) {
-                mResults.add(pictogram);
-                Log.d(TAG,pictogram.toString());
+        mTiempobtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadCollection(ButtonActions.TIEMPO);
             }
-            // notify data change to adapter (refresh the UI)
-            mAdapter.notifyDataSetChanged();
-        } catch(Exception e ) {
-            Log.e(TAG,e.getMessage());
-            e.printStackTrace();
+        });
+
+        mDeportesbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadCollection(ButtonActions.DEPORTE);
+            }
+        });
+
+        mTransportebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadCollection(ButtonActions.TRANSPORTE);
+            }
+        });
+    }
+
+    private void loadCollection(ButtonActions action){
+        String json = null;
+
+        switch(action){
+            case TIEMPO:
+                json = "tiempoPictos.json";
+                break;
+            case DEPORTE:
+                json = "deportesPictos.json";
+                break;
+            case TRANSPORTE:
+                json = "transportePictos.json";
+                break;
+        }
+
+        if(json!=null){
+            //aqui cargamos el json con el metodo del POPULATOR ASYNCTASK==??
+            //mirar bien como se hace porque se queda esperando
+
+            //toast
         }
     }
 }

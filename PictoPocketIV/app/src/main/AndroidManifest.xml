@@ -41,7 +41,7 @@
 
 
         <activity
-            android:name=".PictoAddCategory"
+            android:name=".PictoAddCategoryActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
 

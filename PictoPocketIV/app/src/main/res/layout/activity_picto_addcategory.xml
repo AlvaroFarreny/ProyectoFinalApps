@@ -6,21 +6,38 @@
     android:layout_height="match_parent"
     tools:context=".PictoSearchActivity">
 
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/test_fragment_view"
+        android:name="com.example.pictopocketiv.search.PictoAddCategroyFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout="@layout/fragment_picto_addcategory" />
+
     <!-- Frame Layout -->
-    <FrameLayout
+    <!--<FrameLayout
         android:id="@+id/addcategory_fragment_container"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent">-->
+
+
+
+
+
+
         <!-- preview -->
-        <fragment
-            android:name="com.example.pictopocketiv.search.PictoSearchFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:layout="@layout/fragment_picto_addcategory" />
-    </FrameLayout>
+    <!--<fragment
+        android:name="com.example.pictopocketiv.search.PictoSearchFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout="@layout/fragment_picto_addcategory" />
+</FrameLayout> -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
