@@ -39,15 +39,18 @@
                 android:value="" />
         </activity>
 
+
+        <activity
+            android:name=".PictoAddCategory"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
+
         <!-- ==== PICTOS ===== -->
         <activity
             android:name=".PictosCatalogActivity"
             android:exported="false"
             android:screenOrientation="portrait" /> <!-- Main Activity -->
-        <activity
-            android:name=".PictoAddCategory"
-            android:exported="false"
-            android:screenOrientation="portrait" />
 
         <!-- ==== MAIN ACTIVITY ==== -->
         <activity

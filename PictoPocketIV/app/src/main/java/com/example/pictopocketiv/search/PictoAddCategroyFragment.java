@@ -7,8 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
-import android.widget.ImageButton;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -32,15 +31,13 @@ import java.util.concurrent.ExecutionException;
  */
 public class PictoAddCategroyFragment extends Fragment {
 
-
     private static final String TAG = PictoAddCategroyFragment.class.getSimpleName();
     private final LinkedList<ArasaacModel.Pictogram> mResults = new LinkedList<>();
-    private EditText mTermTxt;
-    private ImageButton mSearchBtn;
-    private ImageButton mCancelBtn;
     private PictoSearchResultAdapter mAdapter;
     private AppCompatActivity mActivity;
-
+    private Button mTiempobtn;
+    private Button mTransportebtn;
+    private Button mDeportesbtn;
     public PictoAddCategroyFragment() {
         // Required empty public constructor
     }
@@ -96,24 +93,13 @@ public class PictoAddCategroyFragment extends Fragment {
         mResultsRecView.setLayoutManager(new GridLayoutManager(
                 this.getContext(), 1,
                 RecyclerView.VERTICAL, false));
-        mTermTxt = view.findViewById(R.id.term_pictos_search);
         // btn
-        mSearchBtn = view.findViewById(R.id.submit_pictos_search);
-        ImageButton mSaveBtn = view.findViewById(R.id.submit_pictos_save);
-        mCancelBtn = view.findViewById(R.id.submit_pictos_cancel);
+        mTiempobtn = view.findViewById(R.id.buttontiempo);
+        mDeportesbtn = view.findViewById(R.id.buttondeportes);
+        mTransportebtn = view.findViewById(R.id.buttontransporte);
     }
 
     private void setListenersUI() {
-        mSearchBtn.setOnClickListener(view -> {
-            try {
-                onSearch();
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        });
-        mCancelBtn.setOnClickListener(view -> onCancelActivity());
     }
 
     private void hideKeyboardUI() {
@@ -128,16 +114,6 @@ public class PictoAddCategroyFragment extends Fragment {
     private void onCancelActivity() {
         hideKeyboardUI();
         getActivity().finish(); // finish the activity
-    }
-
-    private void onSearch() throws ExecutionException, InterruptedException {
-
-        hideKeyboardUI();
-
-        String term = mTermTxt.getText().toString();
-
-        if(term.length() > 0)
-            setData(term);
     }
 
 
