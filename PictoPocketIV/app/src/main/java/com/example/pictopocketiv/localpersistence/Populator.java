@@ -102,4 +102,52 @@ public class Populator {
         return pictos;
     }
 
+
+    public static void OtherPopulate(
+            Context context, String locale,
+            int resolution,
+            String packageName, String path) throws IOException, ExecutionException, InterruptedException {
+
+        CategorizedPictosList catList = readOtherPictos(context, path);
+
+        for (CategorizedPictos pictoCat : catList.pictoCats) {
+
+            PictosPersistenceModel.PictoCategoryInfo categoryInfo =
+                    new PictosPersistenceModel.PictoCategoryInfo(
+                            pictoCat.cat,pictoCat.label,pictoCat.pictoId,pictoCat.drawable);
+
+            LocalPersistenceService.AddCategoryInfoAsync addCategoryInfoAsync =
+                    new LocalPersistenceService.AddCategoryInfoAsync();
+
+            addCategoryInfoAsync.execute(categoryInfo).get();   // Sync
+
+            for (int pictoId : pictoCat.ids) {
+                LocalPersistenceService.downloadAddPicto(pictoId, locale, resolution, categoryInfo.id, packageName);
+            }
+        }
+    }
+    public static Populator.CategorizedPictosList readOtherPictos(Context context, String path)
+            throws IOException {
+
+        AssetManager assman = context.getAssets();
+        InputStream istream = null;
+
+        istream = assman.open(path);
+
+        BufferedReader buffReader = new BufferedReader(
+                new InputStreamReader(istream));
+        StringBuilder strBuilder = new StringBuilder();
+        String line;
+        while ((line = buffReader.readLine()) != null ) {
+            strBuilder.append(line);
+        }
+
+        String jsonStr = strBuilder.toString();
+
+        Gson gson = new Gson();
+        CategorizedPictosList pictos = gson.fromJson(jsonStr,CategorizedPictosList.class);
+
+        return pictos;
+    }
+
 }

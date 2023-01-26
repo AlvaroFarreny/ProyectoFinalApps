@@ -1,5 +1,7 @@
 package com.example.pictopocketiv.search;
 
+import static androidx.browser.customtabs.CustomTabsClient.getPackageName;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
@@ -101,26 +103,38 @@ public class PictoAddCategroyFragment extends Fragment {
         mTiempobtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadCollection(ButtonActions.TIEMPO);
+                try {
+                    loadCollection(ButtonActions.TIEMPO);
+                } catch (Throwable e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
 
         mDeportesbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadCollection(ButtonActions.DEPORTE);
+                try {
+                    loadCollection(ButtonActions.DEPORTE);
+                } catch (Throwable e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
 
         mTransportebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadCollection(ButtonActions.TRANSPORTE);
+                try {
+                    loadCollection(ButtonActions.TRANSPORTE);
+                } catch (Throwable e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
     }
 
-    private void loadCollection(ButtonActions action){
+    private void loadCollection(ButtonActions action) throws Throwable {
         String json = null;
 
         switch(action){
@@ -143,14 +157,15 @@ public class PictoAddCategroyFragment extends Fragment {
         }
     }
 
-    private void goDBPopulation(String jsonName) {
+    private void goDBPopulation(String jsonName) throws Throwable {
         // If empty DB try to populate
         // Use this to check the response
         // Wait to populate before go next state
         Log.d("pruebas","pasa por aqui");
         LocalPersistenceService.populateDBNew(
-                getContext(),jsonName,"es",500);
+                getContext(),"com.example.pictopocketiv","es",500, jsonName);
         //toast
         Toast.makeText(getActivity(), "Completado correctamente!", Toast.LENGTH_LONG).show();
+        getActivity().finish();
     }
 }

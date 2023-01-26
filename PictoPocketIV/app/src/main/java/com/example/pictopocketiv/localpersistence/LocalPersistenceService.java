@@ -323,16 +323,16 @@ public class LocalPersistenceService {
     }
     public static void populateDBNew(
             Context context, String packageName, String locale,
-            int resolution ) {
+            int resolution , String path) {
         // On check if DB is already populated.
         // If false, launch DB population
                         try {
                             // populate
-                            Populator.welcomePopulate(
+                            Populator.OtherPopulate(
                                     context,
                                     locale,
                                     resolution,
-                                    packageName);
+                                    packageName, path);
 
 
                         } catch (IOException e) {
