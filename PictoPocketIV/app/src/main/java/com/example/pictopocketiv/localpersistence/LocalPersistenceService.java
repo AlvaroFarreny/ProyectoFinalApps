@@ -321,7 +321,34 @@ public class LocalPersistenceService {
         void onSuccess(boolean updated);
         void onFailure(Throwable t);
     }
+    public static void populateDBNew(
+            Context context, String packageName, String locale,
+            int resolution ) {
+        // On check if DB is already populated.
+        // If false, launch DB population
+                        try {
+                            // populate
+                            Populator.welcomePopulate(
+                                    context,
+                                    locale,
+                                    resolution,
+                                    packageName);
 
+
+                        } catch (IOException e) {
+                            Log.d("pruebas","ERROR IO");
+                            e.printStackTrace();
+
+                        } catch (ExecutionException e) {
+                            Log.d("pruebas","ERROR EXECUTION");
+                            e.printStackTrace();
+
+                        } catch (InterruptedException e) {
+                            Log.d("pruebas","ERROR INTERRUM");
+                            e.printStackTrace();
+
+                        }
+    }
     public static void populateDB(
             Context context, String packageName, String locale,
             int resolution, OnPopulateDB onPopulateDB ) {

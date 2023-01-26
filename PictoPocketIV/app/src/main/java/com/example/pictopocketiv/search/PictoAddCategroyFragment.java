@@ -8,17 +8,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pictopocketiv.R;
 import com.example.pictopocketiv.arasaac.ArasaacModel;
 import com.example.pictopocketiv.arasaac.ArasaacService;
+import com.example.pictopocketiv.forms.WaitingFragment;
+import com.example.pictopocketiv.localpersistence.LocalPersistenceService;
+import com.example.pictopocketiv.states.MainActivityStateMV;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -133,8 +138,19 @@ public class PictoAddCategroyFragment extends Fragment {
         if(json!=null){
             //aqui cargamos el json con el metodo del POPULATOR ASYNCTASK==??
             //mirar bien como se hace porque se queda esperando
-
+            goDBPopulation(json);
             //toast
         }
+    }
+
+    private void goDBPopulation(String jsonName) {
+        // If empty DB try to populate
+        // Use this to check the response
+        // Wait to populate before go next state
+        Log.d("pruebas","pasa por aqui");
+        LocalPersistenceService.populateDBNew(
+                getContext(),jsonName,"es",500);
+        //toast
+        Toast.makeText(getActivity(), "Completado correctamente!", Toast.LENGTH_LONG).show();
     }
 }
