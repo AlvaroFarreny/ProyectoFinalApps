@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.example.pictopocketiv.R;
@@ -38,6 +39,7 @@ public class ActionsToolsMenuFragment extends Fragment {
     private ImageButton mDeny;
     private ImageButton mLock1;
     private ImageButton mLock2;
+    private Button mAddSetPictos;
 
     private ActionsMV mActionsMenuMV;
 
@@ -117,6 +119,9 @@ public class ActionsToolsMenuFragment extends Fragment {
         mLock2.setOnClickListener(view -> {
             mActionsMenuMV.setAction(ActionsMV.ActionMVType.BLOCK_TOOLS);
         });
+        mAddSetPictos.setOnClickListener(view ->{
+            mActionsMenuMV.setAction(ActionsMV.ActionMVType.CAMBIAR_PICTO);
+        });
     }
 
     private void setWidgets(View view) {
@@ -131,7 +136,7 @@ public class ActionsToolsMenuFragment extends Fragment {
         mDeny = (ImageButton) view.findViewById(R.id.actions_menu_deny_btn);
         mLock1 = (ImageButton) view.findViewById(R.id.actions_menu_lock_1_btn);
         mLock2 = (ImageButton) view.findViewById(R.id.actions_menu_lock_2_btn);
-
+        mAddSetPictos = (Button) view.findViewById(R.id.cambiarPictos);
     }
 
 
