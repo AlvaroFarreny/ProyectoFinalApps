@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,8 @@ import java.util.concurrent.ExecutionException;
  * create an instance of this fragment.
  */
 public class PictosCategoriesFragment extends Fragment {
+
+    private String TAG = PictosCategoriesFragment.class.getSimpleName();
 
     private LinkedList<PictoCategoryInfo> mCategoriesInfo = new LinkedList<>();
     private RecyclerView mCatalogRV;
@@ -55,6 +58,20 @@ public class PictosCategoriesFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TAG,"Estamos en Create");
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.d(TAG,"Estamos en Start");
+        setData();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d(TAG,"Estamos en Resume");
     }
 
     @Override
@@ -67,7 +84,10 @@ public class PictosCategoriesFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setData();
+        Log.d(TAG,"Estamos en ViewCreated");
+        if(mCategoriesInfo.isEmpty()){
+            setData();
+        }
         setUI(view);
     }
 
@@ -108,8 +128,8 @@ public class PictosCategoriesFragment extends Fragment {
                         categoryInfo.getPicto(),
                         categoryInfo.getDrawable()));
             }
-
-            mCategoriesInfo = new LinkedList<>(aCatsInfo);
+            mCategoriesInfo.clear();
+            mCategoriesInfo.addAll(aCatsInfo);
 
         } catch (ExecutionException e) {
             e.printStackTrace();
