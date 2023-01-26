@@ -1,12 +1,14 @@
 package com.example.pictopocketiv;
 
-import android.os.Bundle;
-import android.widget.FrameLayout;
-
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.os.Bundle;
+import android.widget.FrameLayout;
+
+import com.example.pictopocketiv.search.PictoSearchFragment;
 import com.example.pictopocketiv.search.PictoAddCategroyFragment;
 
 public class PictoAddCategory extends AppCompatActivity {
@@ -51,10 +53,10 @@ public class PictoAddCategory extends AppCompatActivity {
     }
 
     private void setFrames() {
-        PictoAddCategroyFragment mSearchFragment = PictoAddCategroyFragment.newInstance(this);
-        FragmentTransaction ft = mFramesManager.beginTransaction();
-        ft.replace(R.id.addcategory_fragment_container, mSearchFragment);
-        ft.addToBackStack(null);
-        ft.commit();
+        // PictoAddCategroyFragment mSearchFragment = PictoAddCategroyFragment.newInstance(this);
+        // FragmentTransaction ft = mFramesManager.beginTransaction();
+        // ft.replace(R.id.addcategory_fragment_container, mSearchFragment);
+        // ft.addToBackStack(null);
+        // ft.commit();
     }
 }

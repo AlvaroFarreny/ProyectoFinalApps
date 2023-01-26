@@ -44,6 +44,10 @@
             android:name=".PictosCatalogActivity"
             android:exported="false"
             android:screenOrientation="portrait" /> <!-- Main Activity -->
+        <activity
+            android:name=".PictoAddCategory"
+            android:exported="false"
+            android:screenOrientation="portrait" />
 
         <!-- ==== MAIN ACTIVITY ==== -->
         <activity
