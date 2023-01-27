@@ -128,6 +128,7 @@ public class PictosCategoriesFragment extends Fragment {
                         categoryInfo.getPicto(),
                         categoryInfo.getDrawable()));
             }
+
             mCategoriesInfo.clear();
             mCategoriesInfo.addAll(aCatsInfo);
 

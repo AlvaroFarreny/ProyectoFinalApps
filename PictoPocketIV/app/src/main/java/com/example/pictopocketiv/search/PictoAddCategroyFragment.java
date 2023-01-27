@@ -39,7 +39,7 @@ import java.util.concurrent.ExecutionException;
 public class PictoAddCategroyFragment extends Fragment {
 
     private static enum ButtonActions{
-        TIEMPO, TRANSPORTE, DEPORTE
+        TIEMPO, TRANSPORTE, DEPORTE, ANIMALES
     }
 
     private static final String TAG = PictoAddCategroyFragment.class.getSimpleName();
@@ -47,6 +47,8 @@ public class PictoAddCategroyFragment extends Fragment {
     private Button mTiempobtn;
     private Button mTransportebtn;
     private Button mDeportesbtn;
+
+    private Button mAnimalesbtn;
     public PictoAddCategroyFragment() {
         // Required empty public constructor
     }
@@ -97,6 +99,7 @@ public class PictoAddCategroyFragment extends Fragment {
         mTiempobtn = view.findViewById(R.id.buttontiempo);
         mDeportesbtn = view.findViewById(R.id.buttondeportes);
         mTransportebtn = view.findViewById(R.id.buttontransporte);
+        mAnimalesbtn = view.findViewById(R.id.buttonanimales);
     }
 
     private void setListenersUI() {
@@ -132,6 +135,17 @@ public class PictoAddCategroyFragment extends Fragment {
                 }
             }
         });
+
+        mAnimalesbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    loadCollection(ButtonActions.ANIMALES);
+                } catch (Throwable e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
     }
 
     private void loadCollection(ButtonActions action) throws Throwable {
@@ -147,6 +161,9 @@ public class PictoAddCategroyFragment extends Fragment {
             case TRANSPORTE:
                 json = "transportePictos.json";
                 break;
+            case ANIMALES:
+                json = "animalesPictos.json";
+                break;
         }
 
         if(json!=null){
@@ -161,7 +178,6 @@ public class PictoAddCategroyFragment extends Fragment {
         // If empty DB try to populate
         // Use this to check the response
         // Wait to populate before go next state
-        Log.d("pruebas","pasa por aqui");
         LocalPersistenceService.populateDBNew(
                 getContext(),"com.example.pictopocketiv","es",500, jsonName);
         //toast
